@@ -1,18 +1,65 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const bot = new Discord.Client();
 const config = require("./botconfig.json");
+const info = require("./package.json");
+const fs = require("fs");
 
-const prefix = config.prefix;
+bot.commands = new Discord.Collection();
 
-client.login(process.env.token);
+fs.readdir("./commands", (err, file) => {
 
-client.on('ready', () => {
-  console.log("SolBot Activated.");
-  client.user.setStatus("away", "In Development");
+  if (err) consol.log(err);
+
+  let jsfile = file.filter(f => f.split(".").pop() === "js");
+  if (jsfile.length <= 0) {
+    console.log("No commands");
+    return;
+  };
+
+  jsfile.forEach((f, i) => {
+    let props = require(`./commands/${f}`);
+    console.lof(`${f} loaded!`);
+    bot.commands.set(props.help.name, props)
+  });
+
 });
 
-client.on('message', message => {
-  if (message.content === 'stats') {
-    message.reply('I am currently in development for the version 1 release in September');
-  }
+bot.login(process.env.token);
+
+bot.on('ready', () => {
+  console.log("SolBot Activated.");
+  bot.user.setPresence({ game: { name: 'in the development phase with JCoDog' }, status: 'dnd' });
+});
+
+bot.on('message', async message => {
+  if (message.author.bot) return;
+  if (message.channel.type === "dm") return;
+
+  let prefix = config.prefix;
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
+  let args = messageArray.slice(1);
+
+  let commandfile = bot.commands.get(cmd.slice(prefix.length));
+  if (commandfile) commandfile.run(bot, message, args);
+
+  // if (cmd == `${prefix}stats`) {
+  //   message.channel.send(`I am currently being worked on by JCoDog for the release in september of my core version 1.0.0 (i am currently ${info.version})`);
+  // };
+  // ^^^ Outdate code when embeds added
+
+  // if (cmd === `${prefix}stats`) {
+  //
+  //   // let bicon =bot.user.displayAvatarURL;
+  //   // let statsembed = new Discord.RichEmbed()
+  //   //   .setTitle("Bot Statistics")
+  //   //   .setDescription("The general information of the bot")
+  //   //   .setColor("#33fede")
+  //   //   .setThumbnail(bicon)
+  //   //   .addField("Name", bot.user.username)
+  //   //   .addField("Created on", bot.user.createdAt)
+  //   //   .addField("Current version", info.version);
+  //   // message.channel.send(statsembed);
+  // };
+
 });
