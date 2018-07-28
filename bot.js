@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require("./botconfig.json");
 
-const prefix = botconfig.prefix;
+const prefix = config.prefix;
 
 client.login(process.env.token);
 
