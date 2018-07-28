@@ -1,1 +1,1 @@
-worker: node bot.js
+eyzalits node bot.js
