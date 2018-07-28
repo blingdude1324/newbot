@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const config = require("./botconfig.json");
-const info = require("./package.json");
 const fs = require("fs");
+
 
 bot.commands = new Discord.Collection();
 
@@ -28,7 +28,7 @@ bot.login(process.env.token);
 
 bot.on('ready', () => {
   console.log("SolBot Activated.");
-  bot.user.setPresence({ game: { name: 'in the development phase with JCoDog' }, status: 'dnd' });
+  bot.user.setGame("Development tunes", "https://twitch.tv/monstercat");
 });
 
 bot.on('message', async message => {
