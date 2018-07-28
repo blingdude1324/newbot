@@ -8,7 +8,7 @@ client.login(process.env.token);
 
 client.on('ready', () => {
   console.log("SolBot Activated.");
-  client.user.setStatus("away", "In Development")
+  client.user.setStatus("away", "In Development");
 });
 
 client.on('message', message => {
