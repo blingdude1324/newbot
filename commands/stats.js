@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const info = require("./package.json");
 
 module.exports.run = async (bot, message, args) => {
   let bicon = bot.user.displayAvatarURL;
@@ -10,7 +9,7 @@ module.exports.run = async (bot, message, args) => {
     .setThumbnail(bicon)
     .addField("Name", bot.user.username)
     .addField("Created on", bot.user.createdAt)
-    .addField("Current version", info.version);
+    .addField("Current version", "0.0.1");
   message.channel.send(statsembed);
 }
 
