@@ -28,7 +28,7 @@ bot.login(process.env.token);
 
 bot.on('ready', () => {
   console.log("SolBot Activated.");
-bot.user.setActivity("Development tunes", "https://twitch.tv/monstercat", { type: STREAMING });
+   bot.user.setActivity("Development Tunes",{type: "STREAMING", url: "https://twitch.tv/monstercat"});
 });
 
 bot.on('message', async message => {
