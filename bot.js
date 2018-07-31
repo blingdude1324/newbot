@@ -3,6 +3,18 @@ const bot = new Discord.Client();
 const config = require("./botconfig.json");
 const fs = require("fs");
 
+// const mysql = require("mysql");
+//
+// var con = mysql.createConnection({
+//   host: config.host,
+//   user: config.user,
+//   password: config.password
+// });
+//
+// con.connect(function(err) {
+//   if (err) throw err;
+//   console.log("Database Connected")
+// })
 
 bot.commands = new Discord.Collection();
 
@@ -28,7 +40,7 @@ bot.login(process.env.token);
 
 bot.on('ready', () => {
   console.log("SolBot Activated.");
-   bot.user.setActivity("Development Tunes",{type: "STREAMING", url: "https://twitch.tv/monstercat"});
+   bot.user.setActivity("Development Tunes w/MonsterCat",{type: "STREAMING", url: "https://twitch.tv/monstercat"});
 });
 
 bot.on('message', async message => {
