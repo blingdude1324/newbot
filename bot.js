@@ -40,7 +40,7 @@ bot.login(process.env.token);
 
 bot.on('ready', () => {
   console.log("SolBot Activated.");
-   bot.user.setActivity("Development Tunes w/MonsterCat",{type: "STREAMING", url: "https://twitch.tv/monstercat"});
+   bot.user.setActivity("the epic failz of Army_Killa44",{type: "STREAMING", url: "https://www.twitch.tv/army_killa44"});
 });
 
 bot.on('message', async message => {
